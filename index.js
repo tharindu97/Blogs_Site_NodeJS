@@ -4,13 +4,18 @@ const expressEdge = require('express-edge')
 
 const express = require('express')
 
-const app = new express()
+const edge = require('edge.js')
+
+const app = new express();
 
 app.use(express.static('public'))
 
 app.use(expressEdge)
-
 app.set('views', `${__dirname}/views`)
+app.use('*', (req,res,next)=>{
+    edge.global('authMiddleware', req.session.userId);
+    next();
+})
 
 app.get('/', (req, res) => {
     res.render('index')
