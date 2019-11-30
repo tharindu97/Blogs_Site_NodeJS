@@ -12,10 +12,10 @@ app.use(express.static('public'))
 
 app.use(expressEdge)
 app.set('views', `${__dirname}/views`)
-app.use('*', (req,res,next)=>{
+/*app.use('*', (req,res,next)=>{
     edge.global('authMiddleware', req.session.userId);
     next();
-})
+})*/
 
 app.get('/', (req, res) => {
     res.render('index')
