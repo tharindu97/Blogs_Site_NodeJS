@@ -4,9 +4,13 @@ const expressEdge = require('express-edge')
 
 const express = require('express')
 
+const mongoose = require('mogoose')
+
 const edge = require('edge.js')
 
 const app = new express();
+
+mongoose.connect('mongodb://localhost/node-js-blog')
 
 app.use(express.static('public'))
 

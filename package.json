@@ -12,7 +12,9 @@
   "dependencies": {
     "edge.js": "^1.1.4",
     "express": "^4.17.1",
-    "express-edge": "^1.0.0"
+    "express-edge": "^1.0.0",
+    "mogoose": "0.0.1-security",
+    "mongoose": "^5.7.13"
   },
   "devDependencies": {
     "nodemon": "^2.0.0"
