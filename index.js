@@ -4,7 +4,7 @@ const expressEdge = require('express-edge')
 
 const express = require('express')
 
-const mongoose = require('mogoose')
+const mongoose = require('mongoose')
 
 const edge = require('edge.js')
 
@@ -27,6 +27,10 @@ app.get('/', (req, res) => {
 
 app.get('/about', (req, res) => {
     res.render('about')
+})
+
+app.get('/posts/new', (req,res) => {
+    res.render('create')
 })
 
 app.get('/post', (req, res) => {
