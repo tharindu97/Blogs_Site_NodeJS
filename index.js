@@ -6,6 +6,8 @@ const express = require('express')
 
 const mongoose = require('mongoose')
 
+const bodyPaser = require('body-parser')
+
 const edge = require('edge.js')
 
 const app = new express();
@@ -16,6 +18,10 @@ app.use(express.static('public'))
 
 app.use(expressEdge)
 app.set('views', `${__dirname}/views`)
+
+app.use(bodyPaser.json())
+app.use(bodyPaser.urlencoded({ extended: true}))
+
 /*app.use('*', (req,res,next)=>{
     edge.global('authMiddleware', req.session.userId);
     next();
@@ -31,6 +37,11 @@ app.get('/about', (req, res) => {
 
 app.get('/posts/new', (req,res) => {
     res.render('create')
+})
+
+app.post('/posts/store', (req, res) =>{
+    console.log(req.body)
+    res.redirect('/')
 })
 
 app.get('/post', (req, res) => {
