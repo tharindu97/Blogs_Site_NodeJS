@@ -2,7 +2,11 @@
 
  const Post = require('./database/models/Post')
 
- mongoose.connect('mongodb://localhost/node-js-test-blog')
+ mongoose.connect('mongodb://localhost/node-js-test-blog',
+    {   useNewUrlParser:true,
+        useUnifiedTopology:true
+    }
+ );
 
  Post.findByIdAndUpdate("5de2384075602930f871bd43",{
      title:'Panama Brooo'
