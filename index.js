@@ -8,6 +8,8 @@ const mongoose = require('mongoose')
 
 const bodyPaser = require('body-parser')
 
+const fileUpload = require('express-fileupload');
+
 const edge = require('edge.js')
 
 const Post = require('./database/models/Post')
@@ -16,7 +18,11 @@ const app = new express();
 
 mongoose.connect('mongodb://localhost/node-js-blog')
 
+app.use(fileUpload());
+
 app.use(express.static('public'))
+
+//image picker
 
 app.use(expressEdge)
 app.set('views', `${__dirname}/views`)
@@ -46,6 +52,7 @@ app.get('/posts/new', (req,res) => {
 })
 
 app.post('/posts/store', (req, res) =>{
+    console.log(req.files);
     Post.create(req.body, (error, post) =>{
         res.redirect('/')
     })
