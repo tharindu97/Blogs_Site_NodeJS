@@ -35,6 +35,12 @@ app.set('views', `${__dirname}/views`)
 app.use(bodyPaser.json())
 app.use(bodyPaser.urlencoded({ extended: true}))
 
+const customMiddleware = (req, res, next) =>{
+    console.log('I HAVE BEEN CALLED.');
+    next()
+}
+app.use(customMiddleware);
+
 /*app.use('*', (req,res,next)=>{
     edge.global('authMiddleware', req.session.userId);
     next();
