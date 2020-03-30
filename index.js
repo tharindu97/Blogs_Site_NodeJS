@@ -35,11 +35,13 @@ app.set('views', `${__dirname}/views`)
 app.use(bodyPaser.json())
 app.use(bodyPaser.urlencoded({ extended: true}))
 
-const customMiddleware = (req, res, next) =>{
-    console.log('I HAVE BEEN CALLED.');
+const validateCreatePostMiddleware = (req, res, next) =>{
+    if(!req.files.image || !req.body.username || !req.body.title || !req.body.subtitle || !req.body.content){
+        return res.redirect('/posts/new');
+    }
     next()
 }
-app.use(customMiddleware);
+app.use('/posts/store',validateCreatePostMiddleware);
 
 /*app.use('*', (req,res,next)=>{
     edge.global('authMiddleware', req.session.userId);
