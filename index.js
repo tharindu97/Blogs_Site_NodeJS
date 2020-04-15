@@ -10,20 +10,19 @@ const fileUpload = require('express-fileupload');
 
 const edge = require('edge.js')
 
-
-const createPostController = require('./controllers/createPost');
-const homePostController = require('./controllers/homePage');
-const storePostController = require('./controllers/storePost');
-const getPostController = require('./controllers/getPost');
-
-const app = new express();
-
-mongoose.connect('mongodb://localhost/node-js-blog',
+mongoose.connect('mongodb+srv://Tharindu12:Tharindu12@cluster0-ldw7t.azure.mongodb.net/test?retryWrites=true&w=majority',
  {   
     useUnifiedTopology: true,
     useNewUrlParser: true
  }
 )
+
+const createPostController = require('./controllers/createPost');
+const homePostController = require('./controllers/homePage');
+const storePostController = require('./controllers/storePost');
+const getPostController = require('./controllers/getPost');
+const createUserControler = require('./controllers/createUser');
+const app = new express();
 
 app.use(fileUpload());
 app.use(express.static('public'))
@@ -37,10 +36,12 @@ const storePost = require('./middleware/storePost');
 app.use('/posts/store',storePost);
 
 
-app.get('/posts/new', createPostController);
+
 app.get('/', homePostController);
-app.post('/posts/store', storePostController);
 app.get('/post/:id', getPostController);
+app.get('/posts/new', createPostController);
+app.post('/posts/store', storePostController);
+app.get('/auth/register',createUserControler);
 
 
 app.listen(4000, () => {
