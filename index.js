@@ -22,6 +22,7 @@ const homePostController = require('./controllers/homePage');
 const storePostController = require('./controllers/storePost');
 const getPostController = require('./controllers/getPost');
 const createUserControler = require('./controllers/createUser');
+const storeUserController = require('./controllers/storeUser');
 const app = new express();
 
 app.use(fileUpload());
@@ -42,6 +43,7 @@ app.get('/post/:id', getPostController);
 app.get('/posts/new', createPostController);
 app.post('/posts/store', storePostController);
 app.get('/auth/register',createUserControler);
+app.post('/users/register',storeUserController);
 
 
 app.listen(4000, () => {
