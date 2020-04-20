@@ -9,13 +9,17 @@ const bodyPaser = require('body-parser')
 const fileUpload = require('express-fileupload');
 
 const edge = require('edge.js')
-
-mongoose.connect('mongodb+srv://Tharindu12:Tharindu12@cluster0-ldw7t.azure.mongodb.net/test?retryWrites=true&w=majority',
- {   
-    useUnifiedTopology: true,
-    useNewUrlParser: true
- }
-)
+try {
+    mongoose.connect('mongodb://localhost/node',
+        { 
+            useUnifiedTopology: true,
+            useNewUrlParser: true      
+        }
+    )
+    console.log('mongoDb Connected');
+} catch (error) {
+    console.log('MongoDB error when connecting: ${error}');
+}
 
 const createPostController = require('./controllers/createPost');
 const homePostController = require('./controllers/homePage');
