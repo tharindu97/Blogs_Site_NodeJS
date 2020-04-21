@@ -44,7 +44,7 @@ const storePost = require('./middleware/storePost');
 app.use('/posts/store',storePost);
 
 
-
+//controllers
 app.get('/', homePostController);
 app.get('/post/:id', getPostController);
 app.get('/posts/new', createPostController);

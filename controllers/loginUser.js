@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 module.exports = (req,res) =>{
     const { email, password } = req.body;
-    //try to find the user.
+    //try to find the users
     User.findOne({ email }, (error, user) => {
         if(user){
             //compare user password.
