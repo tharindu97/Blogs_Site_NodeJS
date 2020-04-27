@@ -12,6 +12,8 @@ const expressSession =require('express-session');
 
 const connectMongo = require('connect-mongo');
 
+const connectFlash = require('connect-flash');
+
 const edge = require('edge.js')
 try {
     mongoose.connect('mongodb+srv://Tharindu12:Tharindu12@cluster0-ldw7t.azure.mongodb.net/test?retryWrites=true&w=majority',
@@ -25,6 +27,8 @@ try {
     console.log('MongoDB error when connecting: ${error}');
 }
 
+
+
 const createPostController = require('./controllers/createPost');
 const homePostController = require('./controllers/homePage');
 const storePostController = require('./controllers/storePost');
@@ -36,6 +40,7 @@ const loginUserController = require('./controllers/loginUser');
 const app = new express();
 
 const mongoStore = connectMongo(expressSession);
+app.use(connectFlash());
 
 app.use(expressSession({
     secret: 'secet',
