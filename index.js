@@ -12,7 +12,7 @@ const expressSession =require('express-session');
 
 const edge = require('edge.js')
 try {
-    mongoose.connect('mongodb://localhost/node',
+    mongoose.connect('mongodb+srv://Tharindu12:Tharindu12@cluster0-ldw7t.azure.mongodb.net/test?retryWrites=true&w=majority',
         { 
             useUnifiedTopology: true,
             useNewUrlParser: true      
@@ -34,7 +34,7 @@ const loginUserController = require('./controllers/loginUser');
 const app = new express();
 
 app.use(expressSession({
-    secret: 'secret'
+    secret: 'secet'
 }));
 
 
