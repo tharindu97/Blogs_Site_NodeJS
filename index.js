@@ -54,14 +54,16 @@ app.use(bodyPaser.json())
 app.use(bodyPaser.urlencoded({ extended: true}))
 
 const storePost = require('./middleware/storePost'); 
+const auth = require('./middleware/auth');
 app.use('/posts/store',storePost);
+app.use('/posts/new', auth);
 
 
 //controllers
 app.get('/', homePostController);
 app.get('/post/:id', getPostController);
-app.get('/posts/new', createPostController);
-app.post('/posts/store', storePostController);
+app.get('/posts/new',auth, createPostController);
+app.post('/posts/store', auth, storePost, storePostController);
 app.get('/auth/register',createUserControler);
 app.get('/auth/login', loginController);
 app.post('/users/login',loginUserController);
