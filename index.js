@@ -16,7 +16,7 @@ const connectFlash = require('connect-flash');
 
 const edge = require('edge.js')
 try {
-    mongoose.connect('mongodb+srv://Tharindu12:Tharindu12@cluster0-ldw7t.azure.mongodb.net/test?retryWrites=true&w=majority',
+    mongoose.connect('mongodb+srv://Tharindu97:Tharindu97@devconnector-t9kxm.mongodb.net/test?authSource=admin&replicaSet=DevConnector-shard-0&readPreference=primary&appname=MongoDB%20Compass&ssl=true',
         { 
             useUnifiedTopology: true,
             useNewUrlParser: true      
@@ -60,6 +60,7 @@ app.use(bodyPaser.urlencoded({ extended: true}))
 
 const storePost = require('./middleware/storePost'); 
 const auth = require('./middleware/auth');
+const redirectIfAuthenticated = require('./middleware/redirectIfAuthenticated');
 app.use('/posts/store',storePost);
 app.use('/posts/new', auth);
 
@@ -69,10 +70,10 @@ app.get('/', homePostController);
 app.get('/post/:id', getPostController);
 app.get('/posts/new',auth, createPostController);
 app.post('/posts/store', auth, storePost, storePostController);
-app.get('/auth/register',createUserControler);
-app.get('/auth/login', loginController);
+app.get('/auth/register', redirectIfAuthenticated, createUserControler);
+app.get('/auth/login', redirectIfAuthenticated, loginController);
 app.post('/users/login',loginUserController);
-app.post('/users/register',storeUserController);
+app.post('/users/register', redirectIfAuthenticated, storeUserController);
 
 
 
