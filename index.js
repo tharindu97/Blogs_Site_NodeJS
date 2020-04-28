@@ -37,6 +37,7 @@ const createUserControler = require('./controllers/createUser');
 const storeUserController = require('./controllers/storeUser');
 const loginController = require('./controllers/login');
 const loginUserController = require('./controllers/loginUser');
+const logoutController = require('./controllers/controllerLogout');
 const app = new express();
 
 const mongoStore = connectMongo(expressSession);
@@ -55,6 +56,11 @@ app.use(express.static('public'))
 app.use(expressEdge)
 app.set('views', `${__dirname}/views`)
 
+app.use('*', (req,res,next) => {
+    edge.global('auth', req.session.userId)
+    next()
+})
+
 app.use(bodyPaser.json())
 app.use(bodyPaser.urlencoded({ extended: true}))
 
@@ -69,6 +75,7 @@ app.use('/posts/new', auth);
 app.get('/', homePostController);
 app.get('/post/:id', getPostController);
 app.get('/posts/new',auth, createPostController);
+app.get('/auth/logout', redirectIfAuthenticated, logoutController);
 app.post('/posts/store', auth, storePost, storePostController);
 app.get('/auth/register', redirectIfAuthenticated, createUserControler);
 app.get('/auth/login', redirectIfAuthenticated, loginController);
