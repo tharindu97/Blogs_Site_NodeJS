@@ -75,14 +75,14 @@ app.use('/posts/new', auth);
 app.get('/', homePostController);
 app.get('/post/:id', getPostController);
 app.get('/posts/new',auth, createPostController);
-app.get('/auth/logout', redirectIfAuthenticated, logoutController);
+app.get('/auth/logout', auth, logoutController);
 app.post('/posts/store', auth, storePost, storePostController);
 app.get('/auth/register', redirectIfAuthenticated, createUserControler);
 app.get('/auth/login', redirectIfAuthenticated, loginController);
-app.post('/users/login',loginUserController);
+app.post('/users/login',redirectIfAuthenticated, loginUserController);
 app.post('/users/register', redirectIfAuthenticated, storeUserController);
 
-
+app.use((req,res) => res.render('not_found'));
 
 app.listen(4000, () => {
     console.log('App Listening on port 4000')
